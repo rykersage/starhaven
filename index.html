@@ -115,6 +115,9 @@
     box-shadow:0 0 10px var(--lime);animation:pulse 1.4s ease-out infinite;}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(182,255,92,.6)}70%{box-shadow:0 0 0 10px rgba(182,255,92,0)}100%{box-shadow:0 0 0 0 rgba(182,255,92,0)}}
   .np .song{color:var(--pink);}
+  .np{display:flex;align-items:center;gap:10px;}
+  .np img{width:48px;height:48px;flex:none;border:2px solid var(--frame);object-fit:cover;display:none;}
+  .np img.on{display:block;}
   .counter{text-align:center;}
   .counter b{font-family:"Press Start 2P",monospace;font-size:15px;color:var(--cyan);
     background:#000;border:2px solid var(--frame);padding:6px 8px;letter-spacing:2px;display:inline-block;}
@@ -209,7 +212,10 @@
 
       <section class="win">
         <div class="bar">now playing</div>
-        <div class="body np">&#9834; <span class="song" id="song">&mdash;</span></div>
+        <div class="body np">
+          <img id="albumArt" alt="" />
+          <div>♫ <span class="song" id="song">—</span></div>
+        </div>
       </section>
 
       <section class="win">
