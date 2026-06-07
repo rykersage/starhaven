@@ -314,14 +314,17 @@ const API = 'https://cities-thesaurus-space-dating.trycloudflare.com';
   async function poll(){
     try{
       const r=await fetch(API+'/api/nowplaying'); const d=await r.json();
+      const art=document.getElementById('albumArt');
       if(d && d.name){
         const label=(d.playing?'':'last: ')+d.artist+' \u2014 '+d.name;
         if(d.url){ el.innerHTML=''; const a=document.createElement('a');
           a.href=d.url; a.target='_blank'; a.rel='noopener'; a.textContent=label; el.appendChild(a); }
         else el.textContent=label;
+        if (d.image){ art.src=d.image; art.classList.add('on'); }
+        else { art.classList.remove('on'); art.removeAttribute('src'); }
         setOnline(d.playing?'online':'away');
-      } else { el.textContent='\u2014 nothing playing \u2014'; setOnline('away'); }
-    }catch(_){ el.textContent='\u2014 offline \u2014'; setOnline('offline'); }
+      } else { el.textContent='\u2014 nothing playing \u2014'; setOnline('away'); art.classList.remove('on'); }
+    }catch(_){ el.textContent='\u2014 offline \u2014'; setOnline('offline'); art.classList.remove('on'); }
   }
   setOnline('offline'); poll(); setInterval(poll,15000);
 })();
